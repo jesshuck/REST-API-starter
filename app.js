@@ -160,6 +160,3 @@ app.delete('/product/delete/:id', (req,res) => {
 });
 
 module.exports = {app, productBuilder};
-
-
-//change to this to show I can revert
