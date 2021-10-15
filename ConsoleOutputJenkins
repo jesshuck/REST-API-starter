@@ -1,0 +1,174 @@
+Console Output
+Started by GitHub push by jesshuck
+Running as SYSTEM
+Building in workspace /home/jenkins/.jenkins/workspace/nodeapp
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /home/jenkins/.jenkins/workspace/nodeapp/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jesshuck/REST-API-starter.git # timeout=10
+Fetching upstream changes from https://github.com/jesshuck/REST-API-starter.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+ > git fetch --tags --progress -- https://github.com/jesshuck/REST-API-starter.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision f7609c6691b9c88e7446fcbd6a8f0d34fca9f7d3 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f f7609c6691b9c88e7446fcbd6a8f0d34fca9f7d3 # timeout=10
+Commit message: "Create bashscripts"
+ > git rev-list --no-walk c316664f728d5321c52a698955eee397e199d5b0 # timeout=10
+[nodeapp] $ /bin/sh -xe /tmp/jenkins1789056834079153021.sh
++ npm install
+npm WARN LBG-Proj@1.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+audited 496 packages in 3.282s
+
+41 packages are looking for funding
+  run `npm fund` for details
+
+found 3 high severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
++ npm test
+
+> LBG-Proj@1.0.0 test /home/jenkins/.jenkins/workspace/nodeapp
+> jest --coverage --passWithNoTests
+
+PASS ./app.test.js
+  ✓ product object builder (1 ms)
+  GET requests
+    ✓ GET product/read endpoint, expect 200 (93 ms)
+    ✓ GET bad endpoint, expect 404 (6 ms)
+  CREATE request
+    ✓ CREATE product test (24 ms)
+
+  console.log
+    
+    READ (all)
+
+      at app.js:57:5
+
+  console.log
+    Reading all products:
+
+      at app.js:69:9
+
+  console.log
+    []
+
+      at app.js:70:9
+
+  console.log
+    
+    CREATE
+
+      at app.js:31:5
+
+  console.log
+    Created a new product:
+
+      at app.js:46:9
+
+  console.log
+    {
+      name: 'test name',
+      description: 'test desc',
+      price: 0,
+      _id: '0JKY0oB8D9DgQnSf'
+    }
+
+      at app.js:47:9
+
+----------|---------|----------|---------|---------|-----------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s     
+----------|---------|----------|---------|---------|-----------------------
+All files |   54.38 |       20 |   45.45 |   59.61 |                       
+ app.js   |   54.38 |       20 |   45.45 |   59.61 | 80-96,106-131,141-156 
+----------|---------|----------|---------|---------|-----------------------
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.733 s, estimated 1 s
+Ran all test suites.
++ npm build
++ docker build -t gcr.io/training-325404/rest_api_image_jess_v3 .
+Sending build context to Docker daemon  40.68MB
+
+Step 1/7 : FROM node:14-alpine
+ ---> fe39f43f1d22
+Step 2/7 : COPY . .
+ ---> c6653ecec31b
+Step 3/7 : RUN npm install
+ ---> Running in cbdb1ed22a99
+[91mnpm WARN LBG-Proj@1.0.0 No repository field.
+[0m[91mnpm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91m
+[0maudited 496 packages in 4.466s
+
+41 packages are looking for funding
+  run `npm fund` for details
+
+found 3 high severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container cbdb1ed22a99
+ ---> cfd77d939a3a
+Step 4/7 : RUN npm install nodemon
+ ---> Running in 5429d99f5c74
+
+> nodemon@2.0.13 postinstall /node_modules/nodemon
+> node bin/postinstall || exit 0
+
+[32mLove nodemon? You can now support the project via the open collective:[22m[39m
+ > [96m[1mhttps://opencollective.com/nodemon/donate[0m
+
+[91mnpm WARN LBG-Proj@1.0.0 No repository field.
+[0m[91mnpm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91m
+[0m+ nodemon@2.0.13
+updated 1 package and audited 496 packages in 7.477s
+
+33 packages are looking for funding
+  run `npm fund` for details
+
+found 3 high severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container 5429d99f5c74
+ ---> caa9668c6cab
+Step 5/7 : ENV PORT=9000
+ ---> Running in 04a31e3d7a8b
+Removing intermediate container 04a31e3d7a8b
+ ---> be56eee6f4eb
+Step 6/7 : EXPOSE 9000
+ ---> Running in 13ff43219072
+Removing intermediate container 13ff43219072
+ ---> 25c3556331fe
+Step 7/7 : ENTRYPOINT ["npm", "start"]
+ ---> Running in dc3d84ef949b
+Removing intermediate container dc3d84ef949b
+ ---> 190d32b92681
+Successfully built 190d32b92681
+Successfully tagged gcr.io/training-325404/rest_api_image_jess_v3:latest
++ docker push gcr.io/training-325404/rest_api_image_jess_v3
+Using default tag: latest
+The push refers to repository [gcr.io/training-325404/rest_api_image_jess_v3]
+aefdc4555967: Preparing
+73f54e936ab9: Preparing
+76ce07f5abc4: Preparing
+20e664c3d99e: Preparing
+b3031b5001d5: Preparing
+a303372b2caa: Preparing
+39982b2a789a: Preparing
+a303372b2caa: Waiting
+39982b2a789a: Waiting
+20e664c3d99e: Layer already exists
+b3031b5001d5: Layer already exists
+39982b2a789a: Layer already exists
+a303372b2caa: Layer already exists
+73f54e936ab9: Pushed
+aefdc4555967: Pushed
+76ce07f5abc4: Pushed
+latest: digest: sha256:8fdb28232595c270125b3bf0b6f4565914f26a33448f415bc2a300d8de1ce618 size: 1789
+Finished: SUCCESS
